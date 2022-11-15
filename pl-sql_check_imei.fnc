@@ -10,14 +10,14 @@ create or replace function check_imei(imei_in varchar2) return number is
   
 begin
   v_len := length(imei_in);
-  v_val_digit := to_number(SUBSTR(imei_in, -1));
-  v_imei_part := substr(imei_in,1 , length(imei_in)-1);
-  v_imei_check :='';
   
   if v_len <> 15 THEN
     return 0;
   END IF;
   
+  v_val_digit := to_number(SUBSTR(imei_in, -1));
+  v_imei_part := substr(imei_in,1 , length(imei_in)-1);
+  v_imei_check :='';
   v_len := v_len -1;
   
   for i in 1..v_len
