@@ -1,4 +1,4 @@
-create or replace function check_imei(imei_in varchar2) return boolean is
+create or replace function check_imei(imei_in varchar2) return number is
   v_check boolean;
   v_len number(10);
   v_val_digit number(1);
@@ -15,7 +15,7 @@ begin
   v_imei_check :='';
   
   if v_len <> 15 THEN
-    return False;
+    return 0;
   END IF;
   
   v_len := v_len -1;
@@ -44,7 +44,11 @@ begin
   
   v_check := (ceil(v_total/10)*10 - v_total) = v_val_digit;
   
-  
-  return(v_check);
+  if v_check THEN
+    return 1;
+  else
+    return 0;
+  END IF;
+ 
 end check_imei;
 /
